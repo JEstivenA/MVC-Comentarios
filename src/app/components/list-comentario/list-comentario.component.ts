@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Comentario } from 'src/app/interfaces/Comentario';
+import { ComentarioService } from 'src/app/services/comentario.service';
 
 @Component({
   selector: 'app-list-comentario',
@@ -14,9 +15,19 @@ export class ListComentarioComponent implements OnInit {
     
   ]
 
-  constructor() { }
+
+  constructor(private _comentarioServices: ComentarioService) { }
 
   ngOnInit(): void {
+    this.getComentarios();
+  }
+
+  getComentarios(){
+    this._comentarioServices.getListComentarios().subscribe(data => {
+      console.log(data);
+    }, error =>{
+      console.log(error);
+    })
   }
 
 }
